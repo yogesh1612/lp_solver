@@ -13,7 +13,6 @@ shinyUI(fluidPage(
     uiOutput('consCtrl'),
     
   ),
-  
   # Main Panel:
   mainPanel( 
     tabsetPanel(
