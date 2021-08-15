@@ -1,0 +1,28 @@
+library(shiny)
+
+ui <- fluidPage(
+  title = 'Creating a UI from a dynamic loop length',
+  sidebarLayout(
+    sidebarPanel(
+      # Determine Length of Loop
+      numericInput(inputId = "NumLoop", "Number of Loops", value = 5, min = 1, max = 10, step = 1)
+    ),
+    mainPanel(
+      # UI output
+      uiOutput('moreControls')
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  output$moreControls <- renderUI({
+    lapply(1:input$NumLoop, function(i) {
+      textInput(inputId = paste0("tex_",i),label = paste0("Enter Constrain ", i))
+      #strong(paste0('Hi, this is output B#', i),br())
+    })
+  })
+  
+}
+
+shinyApp(ui = ui, server = server)
